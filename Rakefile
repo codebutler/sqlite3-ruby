@@ -4,6 +4,8 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 require 'rake/contrib/sshpublisher'
 
+require 'rubygems/gem_runner'
+
 require "./lib/sqlite3/version"
 
 PACKAGE_NAME = "sqlite3-ruby"
@@ -26,8 +28,6 @@ PACKAGE_FILES = FileList.new do |fl|
   fl.include "CHANGELOG.rdoc", "README.rdoc", "LICENSE", "#{PACKAGE_NAME}.gemspec", "setup.rb"
   fl.include SOURCE_FILES
 end
-
-Gem.manage_gems
 
 def can_require( file )
   begin
@@ -78,7 +78,7 @@ end
 desc "Build all packages"
 task :package
 
-package_name = "#{PACKAGE_NAME}-#{PACKAGE_VERSION}"
+package_name = "#{PACKAGE_NAME}-#{PACKAGE_VERSION}.1"
 package_dir = "pkg"
 package_dir_path = "#{package_dir}/#{package_name}"
 
